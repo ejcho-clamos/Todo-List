@@ -1,0 +1,37 @@
+.main-logo-wrap {
+    width: 100%;
+    height: 300px;
+    line-height: 300px;
+}
+
+.main-logo-img-wrap {
+    width: 500px;
+    height: 150px;
+    margin: 0 auto;
+    cursor: pointer;
+}
+
+.main-logo-img-wrap img {
+    vertical-align: middle;
+}
+
+.button-wrap {
+    width: 700px;
+    height: 450px;
+    line-height: 450px;
+    display: flex;
+    margin: 0 auto;
+}
+
+.button-wrap button {
+    width: 250px;
+    height: 50px;
+    margin: 50px;
+    margin-top: 200px;
+    border: none;
+    border-radius: 4px;
+    background-color: white;
+    font-size: 20px;
+    font-weight: bold;
+    cursor: pointer;
+}
