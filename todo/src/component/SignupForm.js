@@ -15,7 +15,7 @@ const SignupForm = () => {
         if (e.key === 'Enter') {
             if (userId.length <= 2 || userId.length > 9) {
                 alert('ID는 3글자 이상 8글자 이하로 작성해주세요.')
-            } else if (userId.key === userData.userId) {
+            } else if (userId.key == userData.userId) {
                 alert('중복된 ID 입니다.')
             } else if (userName.length <= 0) {
                 alert('이름을 작성해주세요.')
