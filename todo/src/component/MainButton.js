@@ -9,7 +9,7 @@ const MainButton = () => {
 
     const goToLogout = () => {
         localStorage.removeItem(token)
-        setToken('/')
+        setToken(false)
         console.log(localStorage.removeItem(token))
     }
     const navigate = useNavigate();
@@ -24,10 +24,11 @@ const MainButton = () => {
     }
     return (
         <div className='button-wrap'>
-            {token ? (
+            {token == false ? (
                 <><button
                     className='tosignup-btn'
-                    onClick={goToSignup}>SIGNUP</button><button
+                    onClick={goToSignup}>SIGNUP</button>
+                    <button
                         className='tologin-btn'
                         onClick={goToLogin}>
                         LOGIN</button></>) : (

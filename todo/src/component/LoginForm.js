@@ -8,8 +8,6 @@ import { LoginState } from '../States/LoginState'
 
 
 const LoginForm = () => {
-
-
     const navigate = useNavigate();
     const [userData, setUserData] = useState({
         userId: ""
@@ -42,7 +40,6 @@ const LoginForm = () => {
          */
         if (token) localStorage.setItem('LoginState', token)
         if (localStorage.getItem('LoginState')) setIsLoggedIn(true)
-        console.log(localStorage.getItem('LoginState'))
     }, [])
 
     return (
