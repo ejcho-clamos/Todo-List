@@ -1,27 +1,33 @@
 import React, { useState } from 'react'
+import { useNavigate } from 'react-router-dom'
 import "../css/Login.css"
 import Login from "../config/Api"
 
 const LoginForm = () => {
+    const navigate = useNavigate();
     const [userData, setUserData] = useState({
         userId: ""
     })
-    const { userId } = userData;
+
 
     const checkEnter = (e) => {
         if (e.key === 'Enter') {
-            if (userData.key !== userId) {
-                alert("옳지 않은 ID 입니다.")
-            } else {
-                goToMain()
-            }
+            goToMain()
         }
     }
     const goToMain = async () => {
         try {
-            await Login.userLogin(userData);
+            const data = await Login.userLogin(userData);
+            if (data?.message == "200") {
+                navigate('/')
+            } else {
+                console.log('로그인 실패')
+                alert('존재하지 않는 ID입니다.')
+            }
+
         } catch {
             console.log('로그인 실패')
+            alert('존재하지 않는 ID입니다.')
         }
     }
     return (

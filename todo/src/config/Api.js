@@ -12,7 +12,7 @@ const Api = async (method, url = "", data = {}, params = {}) => {
             headers: headers,
         });
         const reponseJson = await response.json();
-        return reponseJson?.data;
+        return reponseJson;
     } else {    /** 'post'  */
         const response = await fetch(baseUrl + `?${queryString}`, {
             method: method,
@@ -20,7 +20,7 @@ const Api = async (method, url = "", data = {}, params = {}) => {
             body: JSON.stringify(data),
         });
         const reponseJson = await response.json();
-        return reponseJson?.data;
+        return reponseJson;
     }
 };
 export default {
