@@ -5,7 +5,8 @@ import Main from './page/Main';
 import List from './page/List'
 import Signup from './page/Signup';
 import { RecoilRoot } from 'recoil';
-import MainButton from './component/MainButton';
+import TodoPopup from './component/TodoPopup';
+
 
 const Wrap = () => {
     return (
@@ -17,6 +18,7 @@ const Wrap = () => {
                         <Route path='/login' element={<Login />} />
                         <Route path='/todo' element={<List />} />
                         <Route path='/signup' element={<Signup />} />
+                        <Route path='/modal' element={<TodoPopup />} />
                     </Routes>
 
                 </RecoilRoot>

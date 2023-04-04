@@ -17,7 +17,7 @@ const TodoList = () => {
                 </div>
                 <div className='todo-title-wrap'>
                     <GoChecklist className='title-icons' color='#fff' />
-                    <span>my to-do list</span>
+                    <span>MY TO-DO LIST</span>
                 </div>
                 <div className='todo-list-line'>
 
