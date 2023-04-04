@@ -10,7 +10,6 @@ const MainButton = () => {
     const goToLogout = () => {
         localStorage.removeItem(token)
         setToken(false)
-        console.log(localStorage.removeItem(token))
     }
     const navigate = useNavigate();
     const goToLogin = () => {

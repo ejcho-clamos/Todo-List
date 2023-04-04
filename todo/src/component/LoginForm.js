@@ -40,6 +40,7 @@ const LoginForm = () => {
          */
         if (token) localStorage.setItem('LoginState', token)
         if (localStorage.getItem('LoginState')) setIsLoggedIn(true)
+        console.log(token)
     }, [])
 
     return (
