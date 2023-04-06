@@ -20,7 +20,6 @@ const Wrap = () => {
                         <Route path='/signup' element={<Signup />} />
                         <Route path='/modal' element={<TodoPopup />} />
                     </Routes>
-
                 </RecoilRoot>
             </BrowserRouter>
         </div>

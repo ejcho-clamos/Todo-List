@@ -1,33 +1,67 @@
 import React, { useState } from 'react'
 import { GoChecklist } from 'react-icons/go'
+import { useQuery } from 'react-query'
 import Logo from '../component/Logo'
+import TodoList from '../component/TodoList'
 import TodoPopup from '../component/TodoPopup'
 import '../css/List.css'
+import Lists from '../config/Api'
+import useInvaildDateQueries from '../hooks/useInvaildDateQueries'
 
-const TodoList = () => {
-    const [modalOpen, setModalOpen] = useState(false)
+const List = () => {
+    const [modalOpen, setModalOpen] = useState(false);
+    const deleteQuery = useInvaildDateQueries();
     const goToPopup = () => {
         setModalOpen(true)
+        deleteQuery.deleteQuery(['list']);
     }
+
+    const token = localStorage.getItem("token") || ""
+
+    const { isLoading, data, isError, isFetching } = useQuery(['lists'], ({ queryKey }) => Lists.postList(token, queryKey[1]), {
+        cacheTime: 1000000,
+        staleTime: 1000000,
+        refetchOnMount: true,
+        refetchOnWindowFocus: true,
+        onSuccess: () => {
+
+        },
+        onError: () => {
+
+        }
+    })
+
+    if (isLoading || isFetching) {
+        return <div>Loading..//Spiner 삽입 예정</div>
+    }
+
+    if (isError) {
+        return <div>ToDo List를 불러오지 못했습니다.</div>
+    }
+
+
+
+
     return (
-        <div>
+        <>
+            {modalOpen && <TodoPopup setModalOpen={setModalOpen} />}
             <Logo />
             <div className='todo-wrap'>
                 <div className='todo-logo-wrap'>
                     <h1>TODO-LIST</h1>
-                    <button onClick={goToPopup} className='todo-add-btn'>ADD</button>
-                    {modalOpen && <TodoPopup setModalOpen={setModalOpen} />}
+                    <div className='todo-logo-btn'>
+                        <button onClick={goToPopup} className='todo-add-btn'>ADD</button>
+                    </div>
                 </div>
                 <div className='todo-title-wrap'>
                     <GoChecklist className='title-icons' color='#fff' />
                     <span>MY TO-DO LIST</span>
                 </div>
-                <div className='todo-list-line'>
+                <TodoList />
 
-                </div>
             </div>
-        </div>
+        </>
     )
 }
 
-export default TodoList
+export default List

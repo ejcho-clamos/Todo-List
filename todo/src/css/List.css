@@ -1,26 +1,36 @@
+.todo-wrap {
+    background-color: black;
+}
+
 .todo-logo-wrap {
-    width: 100%;
+    width: 80%;
     height: 100px;
     display: flex;
-    position: relative;
+    margin: 0 auto;
     margin-top: 100px;
 }
 
 .todo-logo-wrap h1 {
-    width: 80%;
-    margin: 0 auto;
+    width: 85%;
+    height: 100px;
     color: white;
     text-decoration: underline;
     font-size: 45px;
 }
 
-.todo-logo-wrap button {
-    position: absolute;
-    right: 15%;
-    top: 15%;
+.todo-logo-wrap .todo-logo-btn {
+    width: 15%;
+    height: 100px;
+    position: relative;
+}
+
+.todo-logo-btn button {
     width: 150px;
     height: 45px;
     border: none;
+    position: absolute;
+    right: 0px;
+    margin-right: 0px;
     border-radius: 4px;
     background-color: white;
     font-weight: bold;
@@ -34,7 +44,7 @@
     line-height: 50px;
     margin: 0 auto;
     margin-top: 50px;
-    margin-bottom: 30px;
+    margin-bottom: 50px;
 }
 
 .title-icons {
@@ -49,10 +59,59 @@
     margin-left: 10px;
 }
 
+/** todo list css */
 .todo-list-line {
     width: 80%;
-    margin: 0 auto;
+    height: 80px;
     background-color: white;
     border: none;
-    border-radius: 4px;
+    border-radius: 8px;
+    display: flex;
+    margin: 0 auto;
+}
+
+.todo-check-wrap {
+    width: 10%;
+    height: 80px;
+    background-color: white;
+    border: none;
+    border-radius: 8px;
+}
+
+.check-icons {
+    background-color: white;
+    border: none;
+    width: 35px;
+    height: 35px;
+    display: block;
+    margin: 0 auto;
+    margin-top: 20px;
+}
+
+.false-icons {
+    background-color: white;
+    border: none;
+    width: 35px;
+    height: 35px;
+    display: block;
+    margin: 0 auto;
+    margin-top: 20px;
+}
+
+.todo-list-title {
+    width: 75%;
+    height: 80px;
+    line-height: 75px;
+    background-color: white;
+    border: none;
+    font-size: 20px;
+    font-weight: bold;
+}
+
+.toggle-wrap {
+    width: 15%;
+    height: 80px;
+    background-color: white;
+    border: none;
+    border-radius: 8px;
 }
