@@ -1,5 +1,5 @@
 import React from 'react'
-import { BrowserRouter as Router, Routes, Route, BrowserRouter } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route, BrowserRouter, useParams } from 'react-router-dom';
 import Login from './page/Login';
 import Main from './page/Main';
 import List from './page/List'
@@ -9,6 +9,7 @@ import TodoPopup from './component/TodoPopup';
 
 
 const Wrap = () => {
+    const { userId } = useParams()
     return (
         <div>
             <BrowserRouter>

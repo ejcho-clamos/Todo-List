@@ -39,10 +39,11 @@ const LoginForm = () => {
          *  getItem(key) : 키에 해당하는 값을 받아온다.
          */
         if (token) localStorage.setItem('LoginState', token)
-        if (userData) localStorage.setItem('LoginState', userData)
+        if (userData.userId) localStorage.setItem('LoginState', userData.userId)
         if (localStorage.getItem('LoginState'))
             setIsLoggedIn(true)
-    }, [])
+        console.log(userData)
+    }, [setIsLoggedIn, token, userData])
 
     return (
         <div className='login-wrap'>

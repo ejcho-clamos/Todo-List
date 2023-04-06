@@ -7,8 +7,9 @@ import TodoPopup from '../component/TodoPopup'
 import '../css/List.css'
 import Lists from '../config/Api'
 import useInvaildDateQueries from '../hooks/useInvaildDateQueries'
+import { useParams } from 'react-router-dom'
 
-const List = () => {
+const List = ({ userId }) => {
     const [modalOpen, setModalOpen] = useState(false);
     const deleteQuery = useInvaildDateQueries();
     const goToPopup = () => {
@@ -18,17 +19,15 @@ const List = () => {
 
     const token = localStorage.getItem("token") || ""
 
-    const { isLoading, data, isError, isFetching } = useQuery(['lists',], ({ queryKey }) => Lists.postList(token, queryKey[1]), {
+    const { isLoading, data, isError, isFetching } = useQuery(['lists', userId], ({ queryKey }) => Lists.postList(token, queryKey[1]), {
+
+        onSuccess: (data) => {
+            console.log(data)
+        },
         cacheTime: 1000000,
         staleTime: 1000000,
         refetchOnMount: true,
-        refetchOnWindowFocus: true,
-        onSuccess: () => {
-
-        },
-        onError: () => {
-
-        }
+        refetchOnWindowFocus: true
     })
 
     if (isLoading || isFetching) {
