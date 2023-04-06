@@ -38,16 +38,12 @@ const ToggleContainer = styled.div`
   }
 `;
 
-const Desc = styled.div`
-  text-align: center;
-  margin: 20px;
-`;
 
-export const Toggle = ({ todo }) => {
+export const Toggle = ({ item }) => {
   const [isOn, setisOn] = useState(false);
 
   const toggleHandler = () => {
-    isOn = todo?.status === true
+    isOn = item?.status === true
     setisOn(!isOn)
   };
   return (

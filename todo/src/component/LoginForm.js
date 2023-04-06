@@ -39,8 +39,9 @@ const LoginForm = () => {
          *  getItem(key) : 키에 해당하는 값을 받아온다.
          */
         if (token) localStorage.setItem('LoginState', token)
-        if (localStorage.getItem('LoginState')) setIsLoggedIn(true)
-        console.log(token)
+        if (userData) localStorage.setItem('LoginState', userData)
+        if (localStorage.getItem('LoginState'))
+            setIsLoggedIn(true)
     }, [])
 
     return (

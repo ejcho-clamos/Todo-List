@@ -18,7 +18,7 @@ const List = () => {
 
     const token = localStorage.getItem("token") || ""
 
-    const { isLoading, data, isError, isFetching } = useQuery(['lists'], ({ queryKey }) => Lists.postList(token, queryKey[1]), {
+    const { isLoading, data, isError, isFetching } = useQuery(['lists',], ({ queryKey }) => Lists.postList(token, queryKey[1]), {
         cacheTime: 1000000,
         staleTime: 1000000,
         refetchOnMount: true,
@@ -57,8 +57,9 @@ const List = () => {
                     <GoChecklist className='title-icons' color='#fff' />
                     <span>MY TO-DO LIST</span>
                 </div>
-                <TodoList />
-
+                {data.map((item) => (
+                    <TodoList key={item.userId} />
+                ))}
             </div>
         </>
     )
