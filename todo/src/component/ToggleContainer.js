@@ -40,7 +40,7 @@ const ToggleContainer = styled.div`
 `;
 
 export const Toggle = ({ item }) => {
-  const [isOn, setisOn] = useState(item);
+  const [isOn, setisOn] = useState(false);
 
   const toggleHandler = () => {
     setisOn(!isOn);

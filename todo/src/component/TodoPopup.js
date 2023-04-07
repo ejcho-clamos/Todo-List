@@ -45,7 +45,7 @@ const TodoPopup = ({ setModalOpen }) => {
   const addModal = async () => {
     try {
       const data = await Todo.listAdd(userTodo);
-      if (data?.message == "200") {
+      if (data?.message == "200" && data?.status == "OK") {
         setIsAddList({
           ...data.data,
         });
@@ -82,7 +82,7 @@ const TodoPopup = ({ setModalOpen }) => {
           onChange={(e) => {
             setUserTodo({
               ...userTodo,
-              status: null,
+              status: false,
             });
           }}
         />
