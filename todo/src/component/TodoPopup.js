@@ -6,14 +6,16 @@ import { Toggle } from "./ToggleContainer";
 import Todo from "../config/Api";
 import { useRecoilState } from "recoil";
 import { LoginState } from "../States/LoginState";
+import { useQueryClient } from "react-query";
 
-const TodoPopup = ({ setModalOpen }) => {
+const TodoPopup = ({ setModalOpen, refetch }) => {
+  const queryClient = useQueryClient();
   const navigate = useNavigate();
-  const [isAddList, setIsAddList] = useRecoilState(LoginState);
+  const [userData, setUserData] = useRecoilState(LoginState);
   const [userTodo, setUserTodo] = useState({
     content: "",
     status: false,
-    userId: isAddList.userId,
+    userId: userData.userId,
   });
 
   /** esc key로 modal 창 닫는 이벤트 추가 */
@@ -34,8 +36,6 @@ const TodoPopup = ({ setModalOpen }) => {
     if (e.key === "Enter") {
       if (userTodo.content.length <= 0) {
         alert("할 일을 적어주세요.");
-      } else if (userTodo.status.value == null) {
-        alert("상태를 선택해주세요.");
       } else {
         addModal();
       }
@@ -46,13 +46,10 @@ const TodoPopup = ({ setModalOpen }) => {
     try {
       const data = await Todo.listAdd(userTodo);
       if (data?.message == "200" && data?.status == "OK") {
-        setIsAddList({
-          ...data.data,
-        });
-        console.log(isAddList);
         alert("등록되었습니다.");
+        queryClient.invalidateQueries(["list"]);
+
         closeModal();
-        navigate("/todo");
       } else {
         alert("공백 없이 입력 부탁드립니다.");
       }
@@ -79,10 +76,11 @@ const TodoPopup = ({ setModalOpen }) => {
       <div className="modal-status-wrap">
         <h3>STATUS</h3>
         <Toggle
+          item={userTodo.status}
           onChange={(e) => {
             setUserTodo({
               ...userTodo,
-              status: false,
+              status: e,
             });
           }}
         />

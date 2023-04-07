@@ -28,7 +28,7 @@ export default {
   insertUser: (data) => Api("post", "/todo/signup", data),
   userLogin: (data) => Api("post", "/todo/login", data),
   listUpdate: (params) => Api("put", "/todo/list/update", params),
-  listDelete: (params) => Api("delete", `/todo/list/delete/{id}`, params),
+  listDelete: (postid) => Api("delete", `/todo/list/delete/${postid}`),
   listAdd: (data) => Api("post", "/todo/list/add", data),
   postList: (id) => Api("get", `/todo/list/${id}`),
 };

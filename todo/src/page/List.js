@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { GoChecklist } from "react-icons/go";
-import { useQuery } from "react-query";
+import { useQuery, useQueryClient } from "react-query";
 import Logo from "../component/Logo";
 import TodoList from "../component/TodoList";
 import TodoPopup from "../component/TodoPopup";
@@ -14,27 +14,26 @@ import { LoginState } from "../States/LoginState";
 const List = () => {
   const [modalOpen, setModalOpen] = useState(false);
   const deleteQuery = useInvaildDateQueries();
+  const queryClient = useQueryClient();
   const goToPopup = () => {
     setModalOpen(true);
-    deleteQuery.deleteQuery(["list"]);
+    // deleteQuery.deleteQuery(["list"]);
   };
   const userDatas = useRecoilValue(LoginState);
 
-  const { isLoading, data, isError, isFetching } = useQuery(
-    ["lists", userDatas.userId],
+  const { isLoading, data, isError } = useQuery(
+    ["list", userDatas.userId],
     ({ queryKey }) => Lists.postList(queryKey[1]),
     {
       onSuccess: (data) => {
         console.log(data);
       },
-      cacheTime: 1000000,
-      staleTime: 1000000,
       refetchOnMount: true,
-      refetchOnWindowFocus: true,
+      refetchOnWindowFocus: false,
     }
   );
 
-  if (isLoading || isFetching) {
+  if (isLoading) {
     return <div>Loading..//Spiner 삽입 예정</div>;
   }
 
@@ -44,7 +43,9 @@ const List = () => {
 
   return (
     <>
-      {modalOpen && <TodoPopup setModalOpen={setModalOpen} />}
+      {modalOpen && (
+        <TodoPopup setModalOpen={setModalOpen} queryClient={queryClient} />
+      )}
       <Logo />
       <div className="todo-wrap">
         <div className="todo-logo-wrap">

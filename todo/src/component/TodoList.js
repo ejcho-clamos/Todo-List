@@ -4,8 +4,35 @@ import { BiTrash } from "react-icons/bi";
 import { useMutation, useQuery, useQueryClient } from "react-query";
 import "../css/List.css";
 import { Toggle } from "./ToggleContainer";
+import Todo from "../config/Api";
+import { useRecoilState } from "recoil";
+import { LoginState } from "../States/LoginState";
 
-const TodoList = ({ item }) => {
+const TodoList = ({ item, refetch }) => {
+  const queryClient = useQueryClient();
+  const [userData, setUserData] = useRecoilState(LoginState);
+  const [userTodo, setUserTodo] = useState({
+    content: userData.content,
+    status: userData.status,
+    userId: userData.userId,
+    id: userData.id,
+  });
+  const toDelTodo = () => {
+    deleteTodo();
+  };
+  const deleteTodo = async () => {
+    try {
+      const data = await Todo.listDelete(userTodo);
+      if (data?.message == "200") {
+        alert("삭제 되었습니다.");
+        queryClient.invalidateQueries(["list"]);
+      } else {
+        alert("실패하였습니다.");
+      }
+    } catch {
+      alert("실패하였습니다.");
+    }
+  };
   return (
     <div className="todo-list-line">
       <div className="todo-check-wrap">
@@ -20,7 +47,7 @@ const TodoList = ({ item }) => {
         <Toggle item={item.status} />
       </div>
       <div className="todo-list-del">
-        <BiTrash className="del-icons" />
+        <BiTrash className="del-icons" onClick={toDelTodo} />
       </div>
     </div>
   );
