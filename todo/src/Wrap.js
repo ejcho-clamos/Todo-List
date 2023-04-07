@@ -9,7 +9,6 @@ import TodoPopup from './component/TodoPopup';
 
 
 const Wrap = () => {
-    const { userId } = useParams()
     return (
         <div>
             <BrowserRouter>

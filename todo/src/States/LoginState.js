@@ -1,5 +1,5 @@
-import { atom } from 'recoil'
-import { recoilPersist } from 'recoil-persist'
+import { atom } from "recoil";
+import { recoilPersist } from "recoil-persist";
 
 /** 1.아무것도 설정 안하고 쓰는 경우
  *    localStorage에 저장되며, key 이름은 'recoil-persist'로 저장됨
@@ -25,7 +25,13 @@ const { persistAtom } = recoilPersist();
 // })
 
 export const LoginState = atom({
-    key: 'LoginState',
-    default: false,         // boolean
-    effects_UNSTABLE: [persistAtom],
-})
+  key: "LoginState",
+  default: {
+    userId: "",
+    userName: "",
+    /** true 면 Login상태 */
+    isLogin: false,
+  },
+  storage: localStorage,
+  effects_UNSTABLE: [persistAtom],
+});
